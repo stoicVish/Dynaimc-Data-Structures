@@ -29,7 +29,7 @@ int query(int start, int end, int low, int high, int sTree[], int i)
     if (start > high || end < low)
         return 0;
 
-    if (start >= low && end <= high)
+    if (start <= low && high <= end)
         return sTree[i];
 
     int mid = low + (high - low) / 2;
