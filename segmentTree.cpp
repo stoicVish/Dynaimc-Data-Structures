@@ -37,20 +37,21 @@ int query(int start, int end, int low, int high, int sTree[], int i)
            query(start, end, mid + 1, high, sTree, 2 * i + 2);
 }
 
+//this update function is only valid for the present implementation
 void update(int index, int segTree[], int low, int high, int i, int inc)
 {
     if (low > high)
         return;
+
+    segTree[i] += inc;
     if (low == high)
-    {
-        if (low == index)
-            segTree[i] += inc;
         return;
-    }
+
     int mid = low + (high - low) / 2;
-    update(index, segTree, low, mid, 2 * i + 1, inc);
-    update(index, segTree, mid + 1, high, 2 * i + 2, inc);
-    segTree[i] = segTree[2 * i + 1] + segTree[2 * i + 2];
+    if (mid >= index)
+        update(index, segTree, low, mid, 2 * i + 1, inc);
+    else
+        update(index, segTree, mid + 1, high, 2 * i + 2, inc);
 }
 
 int main(int argc, char const *argv[])
